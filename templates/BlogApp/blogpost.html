@@ -1,0 +1,94 @@
+{%extends 'BlogApp/base.html'%}
+{%block blogactive%}active{%endblock%}
+{%block title%}
+Blog
+{%endblock%}
+
+{%block parent%}
+{%for message in messages%}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message:</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{%endfor%}
+
+
+<div class="container my-3">
+     {%for posts in post%}
+<div class="blog-post">
+        <h2 class="blog-post-title">{{posts.title}}</h2>
+    <p class="blog-post-meta">{{posts.timestamp}} </p> by <a href="#">{{posts.author}}</a>
+    <p>{{posts.content}}</p>
+</div>
+    {%endfor%}
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Share By Mail</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {%for x in post%}
+            
+          <form method='post' action='/sharebymail/'>
+            {%csrf_token%}
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Subject:</label>
+              <input type="text" class="form-control" id="recipient-name" name='subject' value='{{x.title}}'>
+            </div>
+            <input type="hidden" name="postno" value={{x.serialno}}>
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input type="text" class="form-control" id="recipient-name" name='to'>
+                  </div>
+                  <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" rows='10' name='message'>{{x.content}}</textarea>
+            </div>
+            {%endfor%}
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+    </div>
+  </div>
+
+    </div>
+
+
+
+<div class="container">
+    <h2>Comments {{comment.count}} </h2>
+    {%for x in comment%}
+    <p>{{x.user}} at {{x.timestamp|timesince}} ago</p><p>{{x.comment}}</p>
+{%endfor%}
+
+    <form method="post" action="/blogComment/">
+        {% csrf_token %}
+        {%for posts in post%}
+        <div class="form-group my-2">
+
+            <textarea class="form-control" name='comment' id="comment" cols="10" rows="5" placeholder="Enter your comment here"></textarea>
+        </div>
+        <div class="form-group">
+        <input type="hidden" name="postno" value={{posts.serialno}}>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        {%endfor%}
+    </form>
+</div>
+{%endblock%}
