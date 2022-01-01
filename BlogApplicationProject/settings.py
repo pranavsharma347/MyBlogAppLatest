@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'BlogApplicationProject.wsgi.application'
 DATABASES={
     'default':{
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'herokublog',
+        'NAME':'blogdatabase',
         'USER':'postgres',
         'PASSWORD':'f4Jrm0zLLK9PBWpcQG7p',
         'HOST': 'herokublog.cz7x3kl5ouyb.ap-northeast-1.rds.amazonaws.com',
