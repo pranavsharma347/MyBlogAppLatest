@@ -88,14 +88,24 @@ WSGI_APPLICATION = 'BlogApplicationProject.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'blogapp',
-        'USER':'admin',
-        'PASSWORD':'pranav12',
-        'HOST':'blogapp.cz7x3kl5ouyb.ap-northeast-1.rds.amazonaws.com',
-        'PORT':'3306'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME':'blogapp',
+#         'USER':'admin',
+#         'PASSWORD':'pranav12',
+#         'HOST':'blogapp.cz7x3kl5ouyb.ap-northeast-1.rds.amazonaws.com',
+#         'PORT':'3306'
+#     }
+# }
+
+DATABASES={
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'herokublog',
+        'USER':'postgres',
+        'PASSWORD':'f4Jrm0zLLK9PBWpcQG7p',
+        'HOST': 'herokublog.cz7x3kl5ouyb.ap-northeast-1.rds.amazonaws.com',
     }
 }
 
