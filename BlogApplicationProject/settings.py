@@ -165,11 +165,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.GzipManifestStaticFilesStorage'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_HOST_USER='javashrm@gmail.com'
-EMAIL_HOST_PASSWORD='corejava@1234'
+EMAIL_HOST_PASSWORD='qjgikqjsyzcjxxxn'
 EMAIL_USE_TLS=True
 
 
-django_heroku.settings(locals())
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
+

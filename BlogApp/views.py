@@ -94,7 +94,7 @@ def contactus(request):
     if request.session.has_key('uid') and request.method=="GET":
         return render(request, 'BlogApp/contactus.html')
     elif request.method=='POST':
-        name=request.POST[' name']#here we provide value conatin in name attrbute in html form
+        name=request.POST['name']#here we provide value conatin in name attrbute in html form
         email = request.POST['email']
         phone = request.POST['phone']
         content = request.POST['content']
