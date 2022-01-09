@@ -103,6 +103,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.user.user_details',
+)
+
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL='/home/'
