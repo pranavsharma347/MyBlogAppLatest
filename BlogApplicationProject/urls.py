@@ -34,7 +34,7 @@ urlpatterns = [
     path('basesignup/',views.basesignup,name='basesignup'),
     path('',views.baselogin,name='baselogin'),
     path('sharebymail/',views.sharebymail,name='sharebymail'),
-    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.urls')),
     path('google/',TemplateView.as_view(template_name='BlogApp/index.html'),name='google'),
     path('social-auth/', include('social_django.urls', namespace="social")),# add for social_django_auth
 
