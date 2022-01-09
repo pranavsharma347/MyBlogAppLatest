@@ -30,7 +30,8 @@
     {% comment %} <a href="{% provider_login_url "google" google="https://www.google.com/accounts/o8/id" next="/success/url/" %}">Google</a> {% endcomment %}
 {% comment %} <a href="{% provider_login_url "twitter" %}">Twitter</a> {% endcomment %}
 <a href="{% url "social:begin" "google-oauth2" %}">Google</a><br>
-<a href="{% url "social:begin" "facebook" %}">Login with Facebook</a>
+<a href="{% url "social:begin" "facebook" %}">Facebook</a><br><br>
+{% comment %} <a href='/social-auth/complete/facebook/'>Login with Facebook</a> {% endcomment %}
 
 
     </center>
