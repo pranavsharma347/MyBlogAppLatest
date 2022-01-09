@@ -47,11 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'BlogApp',
     #for social app
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    #provide google authentication
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # #provide google authentication
+    # 'allauth.socialaccount.providers.google',
     
     #provide for package social-auth-app-django
     'social_django'  
@@ -92,7 +92,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
     #add this for social_auth_app_django
     
     'social_core.backends.google.GoogleOAuth2',
