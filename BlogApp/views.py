@@ -64,7 +64,7 @@ def baselogin(request):
     return render(request,'BlogApp/baselogin.html')
 
 def home(request):
-    if request.session.has_key('uid') and request.method == "GET":
+    if request.session.has_key('uid') or request.method == "GET":
                post = Post.objects.all().order_by('-timestamp')[0]
                return render(request,'BlogApp/home.html',{'post':post})
 

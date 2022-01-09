@@ -44,7 +44,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'BlogApp'
+    'django.contrib.sites',
+    'BlogApp',
+    #for social app
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    #provide google authentication
+    'allauth.socialaccount.providers.google',
+    
+    #provide for package social-auth-app-django
+    'social_django'  
 ]
 
 MIDDLEWARE = [
@@ -75,6 +85,43 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    #add this for social_auth_app_django
+    
+    'social_core.backends.google.GoogleOAuth2',
+    
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    
+]
+
+
+SITE_ID = 3
+
+LOGIN_REDIRECT_URL='/home/'
+# Provider specific settings
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         'SCOPE':[
+#             'profile',
+#             'email',
+#         ],
+            
+#         'AUTH_PARAMS':{ 
+#             'access_type':'online',
+#         }
+#     }
+# }
 
 WSGI_APPLICATION = 'BlogApplicationProject.wsgi.application'
 
@@ -167,6 +214,12 @@ EMAIL_PORT=587
 EMAIL_HOST_USER='javashrm@gmail.com'
 EMAIL_HOST_PASSWORD='qjgikqjsyzcjxxxn'
 EMAIL_USE_TLS=True
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "962623803808-mlin25ce8g2j3puh522knah04a3ggtcg.apps.googleusercontent.com"         # Client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"  # Client Secret
+
+SOCIAL_AUTH_FACEBOOK_KEY='255338473350263'
+SOCIAL_AUTH_FACEBOOK_SECRET='65c82217c421920df6a5178494f76719'
 
 
 

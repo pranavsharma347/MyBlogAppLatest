@@ -1,0 +1,17 @@
+{% load socialaccount %}
+<html>
+  <head>
+    <title>Google Authentication with Django</title>
+  </head>
+  <body>
+    {% comment %} <h2>How to Set Up Google Authentication with Django</h2>
+    {% if user.is_authenticated %}
+       <p>Welcome, {{ user.username }} !</p>
+       <a target="_black" href="admin">admin</a>
+       <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      {% if google_login %} {% endcomment %}
+      <a href="{% provider_login_url 'google'%}?next=/">Login with Google</a>      {% comment %} {% endif %}
+    {% endif %} {% endcomment %}
+  </body>
+</html>
