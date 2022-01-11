@@ -81,26 +81,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', # add this
+                'social_django.context_processors.login_redirect', # add th
             ],
         },
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by e-mail
-    # 'allauth.account.auth_backends.AuthenticationBackend',
-    #add this for social_auth_app_django
-    
-    'social_core.backends.google.GoogleOAuth2',
-    
-    'social_core.backends.facebook.FacebookOAuth2',
-
-    
-]
 
 
 SOCIAL_AUTH_PIPELINE = (
@@ -110,6 +98,9 @@ SOCIAL_AUTH_PIPELINE = (
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL='/home/'
+
+
+
 # Provider specific settings
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
@@ -222,13 +213,31 @@ EMAIL_USE_TLS=True
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "962623803808-mlin25ce8g2j3puh522knah04a3ggtcg.apps.googleusercontent.com"         # Client ID
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"  # Client Secret
 
-SOCIAL_AUTH_FACEBOOK_KEY='255338473350263'
-SOCIAL_AUTH_FACEBOOK_SECRET='65c82217c421920df6a5178494f76719'
+SOCIAL_AUTH_FACEBOOK_KEY='628874645205506'
+SOCIAL_AUTH_FACEBOOK_SECRET='a8888e67ae76cb72238ff1517dbb4a52'
 
 
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+    #add this for social_auth_app_django
+    
+    'social_core.backends.google.GoogleOAuth2',
+    
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    
+]
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 django_heroku.settings(locals())
 

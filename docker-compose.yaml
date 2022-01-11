@@ -5,3 +5,9 @@ services:
        command: python manage.py runserver 0.0.0.0:8000
        ports:
            - 8001:8000
+
+   web1:
+       build: .
+       command: python manage.py runserver localhost:8000
+       ports:
+           - 8002:8000
