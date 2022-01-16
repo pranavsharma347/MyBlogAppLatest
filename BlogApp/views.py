@@ -63,7 +63,7 @@ def basesignup(request):
             messages.success(request, "Please confirm your email address to complete the registration")
             return render(request, 'BlogApp/basesignup.html')
         else:
-            messages.error(request, "please choose a unique user")
+            messages.error(request, "Email already exist please choose another email")
             return render(request, 'BlogApp/basesignup.html')
 
 
