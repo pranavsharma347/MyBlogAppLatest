@@ -1,6 +1,28 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .managers import CustomUserManager
+from django.conf import settings
+
+
+
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+        email = models.EmailField(unique=True)
+        first_name=models.CharField(max_length=264)
+        last_name=models.CharField(max_length=264)
+        mobile_no=models.CharField(max_length=10)
+        is_verified = models.BooleanField(default=False)
+        is_active = models.BooleanField(default=True)
+        is_staff = models.BooleanField(default=False)
+
+        USERNAME_FIELD = 'email'
+        REQUIRED_FIELDS = []
+
+        objects = CustomUserManager()
+
+        def __str__(self):
+            return self.email
 
 # Create your models here.
 class ContactUs(models.Model):
@@ -28,7 +50,7 @@ class Post(models.Model):
 class BlogComment(models.Model):
     serialno = models.AutoField(primary_key=True)
     comment=models.TextField()
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
     parent=models.ForeignKey('self',on_delete=models.CharField,null=True)
     timestamp=models.DateTimeField(default=now)

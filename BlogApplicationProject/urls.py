@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from BlogApp import views
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 admin.site.site_header="MyBlogApp Admin"
 admin.site.site_title="MyBlogApp"
 admin.site.index_title="Welcome to MyBlogAdmin Panel"
@@ -37,6 +38,16 @@ urlpatterns = [
     # path('accounts/', include('allauth.urls')),
 
     path('social-auth/', include('social_django.urls', namespace="social")),# add for social_django_auth
+    # path('accounts/', include('django.contrib.auth.urls'))
+    path('password_reset/',auth_views.PasswordResetView.as_view(template_name='BlogApp/password_reset.html'),name='password_reset'),
+    #here password_reset is my own customize template
+    path('password_reset_done/',auth_views.PasswordResetDoneView.as_view(template_name='BlogApp/password_reset_done.html'),name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='BlogApp/password_reset_confirm.html'),name="password_reset_confirm"),
+    path('password_reset_complete/',auth_views.PasswordResetCompleteView.as_view(template_name='BlogApp/password_reset_complete.html'),name="password_reset_complete"),
+    #here PasswordResetView is an built in class django-admin
+    #if you use password resset of django admin then PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView compulsory required
+    path('activate/<uidb64>/<token>/',views.activate,name='activate'),
+    path('changepassword/',views.changePassword,name='changepassword')
 
 
 

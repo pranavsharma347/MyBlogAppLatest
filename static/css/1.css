@@ -1,9 +1,16 @@
 #login{
-height:500px;
-width:500px;
+height:400px;
+width:400px;
 }
 
 #img{
 height: 50px;
 width: 50px;
 		}
+
+
+#buttonLogin{
+	width: 370px;
+}
+
+

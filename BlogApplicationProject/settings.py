@@ -33,6 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
+AUTH_USER_MODEL = 'BlogApp.CustomUser'
+
 
 # Application definition
 
@@ -54,7 +56,8 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     
     #provide for package social-auth-app-django
-    'social_django'  
+    'social_django'  ,
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -95,7 +98,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SITE_ID = 3
+SITE_ID = 4
 
 LOGIN_REDIRECT_URL='/home/'
 
@@ -202,19 +205,25 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
 STATICFILES_STORAGE = 'whitenoise.storage.GzipManifestStaticFilesStorage'
 
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_HOST_USER='javashrm@gmail.com'
-EMAIL_HOST_PASSWORD='qjgikqjsyzcjxxxn'
-EMAIL_USE_TLS=True
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "962623803808-mlin25ce8g2j3puh522knah04a3ggtcg.apps.googleusercontent.com"         # Client ID
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"  # Client Secret
 
 SOCIAL_AUTH_FACEBOOK_KEY='628874645205506'
 SOCIAL_AUTH_FACEBOOK_SECRET='a8888e67ae76cb72238ff1517dbb4a52'
+
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='javashrm@gmail.com'
+EMAIL_HOST_PASSWORD='qjgikqjsyzcjxxxn'
+EMAIL_USE_TLS=True
 
 
 
@@ -224,7 +233,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     
     # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
     # 'allauth.account.auth_backends.AuthenticationBackend',
@@ -233,6 +242,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     
     'social_core.backends.facebook.FacebookOAuth2',
+    
+    'django.contrib.auth.backends.AllowAllUsersModelBackend'
 
     
 ]
