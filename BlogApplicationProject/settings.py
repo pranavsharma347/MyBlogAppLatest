@@ -58,7 +58,18 @@ INSTALLED_APPS = [
     #provide for package social-auth-app-django
     'social_django'  ,
     'crispy_forms',
+    'django_celery_results',
+    'django_celery_beat'
 ]
+
+
+BROKER_URL = 'redis://127.0.0.1:6379' # acts as message broker
+CELERY_RESULT_BACKEND='django-db' # this store task assigned to celery in json format
+# BROKER_BACKEND='db+postgresql://postgres:f4Jrm0zLLK9PBWpcQG7p@herokublog.cz7x3kl5ouyb.ap-northeast-1.rds.amazonaws.com/blogdatabase'
+# CELERY_ACCEPT_CONTENT=['application/json']
+# CELERY_RESULT_SERIALIZER='json'
+# CELERY_TASK_SERIALIZER='json'
+CELERY_IMPORTS =['BlogApp.task',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,7 +109,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SITE_ID = 3
+SITE_ID = 4
 
 LOGIN_REDIRECT_URL='/home/'
 

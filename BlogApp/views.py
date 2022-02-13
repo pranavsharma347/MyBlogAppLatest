@@ -14,7 +14,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from BlogApp.Password.generate_token import account_activation_token
-from django.core.mail import EmailMessage
+from .task import share_by_mail,signup_mail
 
 
 
@@ -53,13 +53,8 @@ def basesignup(request):
                 'uid':urlsafe_base64_encode(force_bytes(myuser.pk)),
                 'token':account_activation_token.make_token(myuser),
             })
-            print(message)
             to_email = email
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
-            email.content_subtype = 'html'
-            email.send()
+            signup_mail.delay(mail_subject,message,to_email)
             messages.success(request, "Please confirm your email address to complete the registration")
             return render(request, 'BlogApp/basesignup.html')
         else:
@@ -183,7 +178,10 @@ def sharebymail(request):
         message=request.POST['message']
         postsno = request.POST.get('postno')
         post = Post.objects.get(serialno=postsno)
-        send_mail(subject,message,'javashrm@gmail.com',[to],fail_silently=False)
+        #from here pass all data into celery function
+        mail_data={'subject':subject,'message':message,'email':'javashrm@gmail.com','to':to}
+        share_by_mail.delay(mail_data)
+        # send_mail(subject,message,'javashrm@gmail.com',[to],fail_silently=False)
         messages.success(request,'mail sent succeesfully')
         return redirect('blogpost',slug=post.slug)
 
